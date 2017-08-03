@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.15.3",
-    "google-images": "^2.1.0"
+    "google-images": "^2.1.0",
+    "mongodb": "^2.2.30"
   }
 }
