@@ -27,34 +27,21 @@ app.get('/', function (req, res) {
 
 // Example: http://localhost:8000/api/search?term=lake&offset=13
 app.get('/api/search', function (req, res) {
-    console.log(req.query) // should return the query string
     var searchTerm = req.query.term;
-    console.log("Searching for: ", searchTerm);
     var offset = req.query.offset | 0;
-    //console.log(req.query.term, req.query.offset);   
-
-    if (searchTerm) {        
-        client.search(searchTerm).then(images => {
+    if (searchTerm) {
+        client.search(searchTerm, {page: offset}).then(images => {
            // console.log(images);            
             res.json(images);
-        });
-        
+        });        
         // log search term to database        
         var now = new Date();
         var date = now.toISOString();
         database.collection('log').insert( { term: searchTerm, when: date } );
-
     } else {
         console.log('No search term')
         res.send('No search term');
     }
-
-    // console.log('Search for: ', searchTerm);
-    //console.log('Offset: ', offset);    
-    // var output = JSON.stringify(req.params);
-    // console.log("Term: " + JSON.stringify(req.params));    
-    //res.send(req.params);
-    //res.send('search ' + req.params.term + 'offset: ' + req.params.offset );    
 });
 
 app.get('/api/latest', (req, res) => {
