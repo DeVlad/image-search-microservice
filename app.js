@@ -30,8 +30,7 @@ app.get('/api/search', function (req, res) {
     var searchTerm = req.query.term;
     var offset = req.query.offset | 0;
     if (searchTerm) {
-        client.search(searchTerm, {page: offset}).then(images => {
-           // console.log(images);            
+        client.search(searchTerm, {page: offset}).then(images => {                    
             res.json(images);
         });        
         // log search term to database        
@@ -39,17 +38,17 @@ app.get('/api/search', function (req, res) {
         var date = now.toISOString();
         database.collection('log').insert( { term: searchTerm, when: date } );
     } else {
-        console.log('No search term')
+        console.log('No search term');
         res.send('No search term');
     }
 });
 
 app.get('/api/latest', (req, res) => {
+    // Display latest 10 documents from log
     database.collection('log').find({}, {
         _id: 0
-    }).limit(10).toArray(function (err, result) {
-        if (err) throw err
-        //console.log(result)
+    }).sort({$natural:-1}).limit(10).toArray(function (err, result) {
+        if (err) throw err;        
         res.json(result);
     });
 });
