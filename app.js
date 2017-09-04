@@ -20,21 +20,10 @@ MongoClient.connect(url, function (err, db) {
 var GoogleImages = require('google-images');
 var credentials = require('./config/credentials');
 var client = new GoogleImages(credentials.cseId, credentials.apiKey);
-// Test
-var findImages = require('./lib/findimages');
-
-app.get('/test', function (req, res) {
-    console.log(findImages.find());
-    res.send(findImages.find());
-});
-
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');
 });
-
-
-// Get timestamp before database recording: var timestamp = new Date().toISOString();
 
 // Example: http://localhost:8000/api/search?term=lake&offset=13
 app.get('/api/search', function (req, res) {
@@ -63,8 +52,7 @@ app.get('/api/search', function (req, res) {
     // console.log('Search for: ', searchTerm);
     //console.log('Offset: ', offset);    
     // var output = JSON.stringify(req.params);
-    // console.log("Term: " + JSON.stringify(req.params));
-    
+    // console.log("Term: " + JSON.stringify(req.params));    
     //res.send(req.params);
     //res.send('search ' + req.params.term + 'offset: ' + req.params.offset );    
 });
