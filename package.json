@@ -16,5 +16,8 @@
     "express": "^4.15.3",
     "google-images": "^2.1.0",
     "mongodb": "^2.2.30"
+  },
+    "engines": {
+    "node": "^6.10.3"
   }
 }
