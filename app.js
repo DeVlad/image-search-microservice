@@ -13,6 +13,9 @@ MongoClient.connect(url, function (err, db) {
     if (!err) {
         console.log('Database connection established');
         database = db;
+    } else {        
+        console.log('Database connection failed');
+        //throw err;
     }
 });
 
