@@ -1,13 +1,16 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 8000;
+var credentials = require('./config/credentials');
 
 app.use(express.static('public'));
 
 // MongoDB
 var MongoClient = require('mongodb').MongoClient;
 var database;
-var url = 'mongodb://localhost:27017/image-search';
+var url = credentials.database;
+// var url = 'mongodb://localhost:27017/image-search';
+
 // Use connect method to connect to the Server 
 MongoClient.connect(url, function (err, db) {
     if (!err) {
@@ -21,7 +24,6 @@ MongoClient.connect(url, function (err, db) {
 
 // Image search
 var GoogleImages = require('google-images');
-var credentials = require('./config/credentials');
 var client = new GoogleImages(credentials.cseId, credentials.apiKey);
 
 app.get('/', function (req, res) {
@@ -33,7 +35,7 @@ app.get('/api/search', function (req, res) {
     var searchTerm = req.query.term;
     var offset = req.query.offset | 0;
     if (searchTerm) {
-        client.search(searchTerm, {page: offset}).then(images => {                    
+        client.search(searchTerm, {page: offset}).then(function (images) {                    
             res.json(images);
         });        
         // log search term to database        
@@ -41,12 +43,12 @@ app.get('/api/search', function (req, res) {
         var date = now.toISOString();
         database.collection('log').insert( { term: searchTerm, when: date } );
     } else {
-        console.log('No search term');
+        //console.log('No search term');
         res.send('No search term');
     }
 });
 
-app.get('/api/latest', (req, res) => {
+app.get('/api/latest', function (req, res) {
     // Display latest 10 documents from log
     database.collection('log').find({}, {
         _id: 0
