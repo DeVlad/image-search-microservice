@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Deyan Vladkov",
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DeVlad/image-search-microservice.git"
+  },
   "dependencies": {
     "express": "^4.15.3",
     "google-images": "^2.1.0",
