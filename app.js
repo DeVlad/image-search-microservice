@@ -1,14 +1,13 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 8000;
-var credentials = require('./config/credentials');
 
 app.use(express.static('public'));
 
 // MongoDB
 var MongoClient = require('mongodb').MongoClient;
 var database;
-var url = credentials.database;
+var url = process.env.MONGODB_URI;
 // var url = 'mongodb://localhost:27017/image-search';
 
 // Use connect method to connect to the Server 
@@ -24,7 +23,7 @@ MongoClient.connect(url, function (err, db) {
 
 // Image search
 var GoogleImages = require('google-images');
-var client = new GoogleImages(credentials.cseId, credentials.apiKey);
+var client = new GoogleImages(process.env.CSE_ID, process.env.API_KEY);
 
 app.get('/', function (req, res) {
     res.sendFile('index.html');

@@ -3,3 +3,4 @@
 !/public/uploads/.gitkeep
 /config/credentials.js
 package-lock.json
+set-env.sh
