@@ -4,3 +4,4 @@
 /config/credentials.js
 package-lock.json
 set-env.sh
+.env
