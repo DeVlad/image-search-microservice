@@ -5,15 +5,23 @@
     <meta charset="utf-8">
     <title>Image Search API</title>
     <meta name="description" content="Image Search API">
-    <meta name="author" content="Deyan Vladkov">
+    <meta name="author" content="Deyan Vladkov">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <h1>Image Search API</h1>
     <h2>Node.js, Express.js &amp; MongoDB example image search api.</h2>
-    <p><strong>Example:</strong> /api/search?term=tesla</p>
-    <p><strong>With offset:</strong> /api/search?term=mars&amp;offset=4</p>
-    <p><strong>Show search history:</strong> /api/latest</p>
+    <p><strong>Example: </strong><span class="baseurl"></span>/api/search?term=tesla</p>
+    <p><strong>With offset: </strong><span class="baseurl"></span>/api/search?term=mars&amp;offset=4</p>
+    <p><strong>Show search history: </strong><span class="baseurl"></span>/api/latest</p>    
+    <script>
+        var baseUrl = window.location.origin;
+        var elements = document.getElementsByClassName("baseurl");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].innerHTML = baseUrl;
+        }
+    </script>
 </body>
 
 </html>
